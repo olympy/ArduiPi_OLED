@@ -7,18 +7,22 @@
 // Author: Mike McCauley
 // Copyright (C) 2011-2013 Mike McCauley
 // $Id: bcm2835.c,v 1.10 2013/03/18 05:57:36 mikem Exp mikem $
-// 
+//
 // 03/17/2013 : Charles-Henri Hallard (http://hallard.me)
 //              Modified Adding some fonctionnalities
-//							Added millis() function
+//              Added millis() function
 //              Added option to use custom Chip Select Pin PI GPIO instead of only CE0 CE1
 //              Done a hack to use CE1 by software as custom CS pin because HW does not work
 //              Added function to determine PI revision board
-//							Added function to set SPI speed (instead of divider for easier look in code)
+//              Added function to set SPI speed (instead of divider for easier look in code)
+//
 // 06/29/2013   Incorporated latest version of bcm2825.h done by Mike McCauley
-// 
-// 08/26/2015	Lorenzo Delana (lorenzo.delana@gmail.com)
-//		Use of i2c-2 if BANANAPI macro enabled
+//
+// 08/26/2015   Lorenzo Delana (lorenzo.delana@gmail.com)
+//              Use of i2c-2 if BANANAPI macro enabled
+//
+// 09/01/2025   Alexander Mokrov (ur6lkw@olympy.org.ua)
+//              Orange Pi Zero 3 support if OPIZ3 macro enabled
 
 
 #include <stdio.h>
@@ -26,6 +30,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/i2c-dev.h>
+#include <i2c/smbus.h>
 
 #include <errno.h>
 #include <sys/mman.h>
@@ -817,7 +822,11 @@ int bcm2835_i2c_begin(void)
 	int fd ;
 
 #if BANANAPI
+#pragma message "Using Banana Pi config - /dev/i2c-2"
 	if ((fd = open ("/dev/i2c-2", O_RDWR)) < 0)
+#elif OPIZ3
+#pragma message "Using Orange Pi Zero 3 config - /dev/i2c-3"
+	if ((fd = open ("/dev/i2c-3", O_RDWR)) < 0)
 #else
 	if ((fd = open (bcm2835_get_pi_version() == 1 ? "/dev/i2c-0":"/dev/i2c-1" , O_RDWR)) < 0)
 #endif
