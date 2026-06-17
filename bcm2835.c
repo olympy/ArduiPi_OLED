@@ -821,12 +821,9 @@ int bcm2835_i2c_begin(void)
 {
 	int fd ;
 
-#if BANANAPI
-#pragma message "Using Banana Pi config - /dev/i2c-2"
-	if ((fd = open ("/dev/i2c-2", O_RDWR)) < 0)
-#elif OPIZ3
-#pragma message "Using Orange Pi Zero 3 config - /dev/i2c-3"
-	if ((fd = open ("/dev/i2c-3", O_RDWR)) < 0)
+#ifdef OLEDPORT
+#pragma message "Using custom port " OLEDPORT
+	if ((fd = open (OLEDPORT, O_RDWR)) < 0)
 #else
 	if ((fd = open (bcm2835_get_pi_version() == 1 ? "/dev/i2c-0":"/dev/i2c-1" , O_RDWR)) < 0)
 #endif
