@@ -15,7 +15,10 @@
 #               added bananapi specific CCFLAGS and conditional macro BANANPI
 #
 # 09/01/2025    Alexander Mokrov (ur6lkw@olympy.org.ua)
-#               Orange Pi Zero 3 support if OPIZ3 macro enabled
+#               Orange Pi Zero 3 support if OPIZ3 hwplat chosen
+#
+# 06/17/2026    Alexander Mokrov (ur6lkw@olympy.org.ua)
+#               Orange Pi Zero 2W support if OPIZ2W hwplat chosen
 #
 # *********************************************************************
 
@@ -27,12 +30,14 @@ HWPLAT:=$(shell cat $(ROOT_DIR)/hwplatform)
 
 # sets CCFLAGS hw platform dependant
 ifeq ($(HWPLAT),BananaPI)
-	CCFLAGS=-Wall -Ofast -mfpu=vfpv4 -mfloat-abi=hard -march=armv7 -mtune=cortex-a7 -DBANANAPI
+	CCFLAGS=-Wall -Ofast -mfpu=vfpv4 -mfloat-abi=hard -march=armv7 -mtune=cortex-a7 -DOLEDPORT='"/dev/i2c-2"'
 else ifeq ($(HWPLAT),OPIZ3)
-	CCFLAGS=-Ofast -march=native -DOPIZ3
+	CCFLAGS=-Ofast -march=armv8-a -DOLEDPORT='"/dev/i2c-3"'
+else ifeq ($(HWPLAT),OPIZ2W)
+	CCFLAGS=-Ofast -march=armv8-a -DOLEDPORT='"/dev/i2c-3"'
 else # fallback to raspberry
 	# The recommended compiler flags for the Raspberry Pi
-	CCFLAGS=-Ofast -mfpu=vfp -mfloat-abi=hard -march=armv6zk -mtune=arm1176jzf-s
+	CCFLAGS=-Ofast -marm -mfpu=vfp -mfloat-abi=hard -march=armv6zk -mtune=arm1176jzf-s
 endif
 
 # Where you want it installed when you do 'make install'

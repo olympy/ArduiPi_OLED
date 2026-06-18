@@ -11,6 +11,7 @@
 #
 # UR6LKW 2025-09-01 :
 #   - Orange PI Zero 3 support (/dev/i2c-3 port, CFLAGS)
+#   - Orange PI Zero 2W support (/dev/i2c-2 port, CFLAGS)
 
 BD=`dirname $0`
 BASEDIR=`realpath $BD`
@@ -18,7 +19,8 @@ BASEDIR=`realpath $BD`
 echo "Specify your platform:"
 echo "  1. RaspberryPI"
 echo "  2. BananaPI"
-echo "  3. OrangePI Zero3"
+echo "  3. OrangePI Zero 3 (stock Debian Bookworm)"
+echo "  4. OrangePI Zero 2W (Armbian Trixie)"
 
 read -n 1 c
 echo
@@ -30,8 +32,11 @@ elif [ "$c" == "2" ]; then
 	echo "Setting for BananaPI"
 	HW="BananaPI"
 elif [ "$c" == "3" ]; then
-	echo "Setting for OrangePI Zero3"
+	echo "Setting for OrangePI Zero 3"
 	HW="OPIZ3"
+elif [ "$c" == "4" ]; then
+	echo "Setting for OrangePI Zero 2W (Armbian Trixie)"
+	HW="OPIZ2W"
 else
 	echo "Invalid argument given."
 	HW="RaspberryPI" # fallback to raspi
