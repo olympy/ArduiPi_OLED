@@ -1,3 +1,6 @@
+# Temporary build config
+hwplatform
+
 # Object files
 *.o
 
