@@ -21,8 +21,9 @@
 // 08/26/2015   Lorenzo Delana (lorenzo.delana@gmail.com)
 //              Use of i2c-2 if BANANAPI macro enabled
 //
-// 09/01/2025   Alexander Mokrov (ur6lkw@olympy.org.ua)
-//              Orange Pi Zero 3 support if OPIZ3 macro enabled
+// 06/17/2026   Alexander Mokrov (ur6lkw@olympy.org.ua)
+//              Orange Pi Zero (and possibly other devices) support via OLEDPORT macro (set
+//              it to "/dev/i2c-3" for instance)
 
 
 #include <stdio.h>

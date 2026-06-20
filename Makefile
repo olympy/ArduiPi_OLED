@@ -14,11 +14,9 @@
 # 08/26/2015    Lorenzo Delana (lorenzo.delana@gmail.com)
 #               added bananapi specific CCFLAGS and conditional macro BANANPI
 #
-# 09/01/2025    Alexander Mokrov (ur6lkw@olympy.org.ua)
-#               Orange Pi Zero 3 support if OPIZ3 hwplat chosen
-#
 # 06/17/2026    Alexander Mokrov (ur6lkw@olympy.org.ua)
-#               Orange Pi Zero 2W support if OPIZ2W hwplat chosen
+#               Orange Pi Zero (and possibly other devices) support via OLEDPORT macro (set
+#               it to "/dev/i2c-3" for instance)
 #
 # *********************************************************************
 
