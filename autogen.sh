@@ -21,6 +21,7 @@ echo "  1. RaspberryPI"
 echo "  2. BananaPI"
 echo "  3. OrangePI Zero 3 (stock Debian Bookworm)"
 echo "  4. OrangePI Zero 2W (Armbian Trixie)"
+echo "  5. Generic x86"
 
 read -n 1 c
 echo
@@ -37,6 +38,9 @@ elif [ "$c" == "3" ]; then
 elif [ "$c" == "4" ]; then
 	echo "Setting for OrangePI Zero 2W (Armbian Trixie)"
 	HW="OPIZ2W"
+elif [ "$c" == "5" ]; then
+	echo "Setting for Generic x86"
+	HW="X86"
 else
 	echo "Invalid argument given."
 	HW="RaspberryPI" # fallback to raspi

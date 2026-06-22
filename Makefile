@@ -33,6 +33,8 @@ else ifeq ($(HWPLAT),OPIZ3)
 	CCFLAGS=-Ofast -march=armv8-a -DOLEDPORT='"/dev/i2c-3"'
 else ifeq ($(HWPLAT),OPIZ2W)
 	CCFLAGS=-Ofast -march=armv8-a -DOLEDPORT='"/dev/i2c-3"'
+else ifeq ($(HWPLAT),X86)
+	CCFLAGS=-Wall -Ofast -DOLEDPORT='"/dev/i2c-0"'
 else # fallback to raspberry
 	# The recommended compiler flags for the Raspberry Pi
 	CCFLAGS=-Ofast -marm -mfpu=vfp -mfloat-abi=hard -march=armv6zk -mtune=arm1176jzf-s
